@@ -13,14 +13,17 @@ RUN mkdir -p /var/lib/smesh \
 ADD application.yml /var/lib/smesh/
 
 # Add server conf file
-
+ADD smesh-server.conf /var/lib/smesh/
 
 # Add dedicated user to run the node
 RUN groupadd -r smesh-node && useradd -r -g smesh-node smesh-node
 
-RUN chown smesh-node:smesh-node /var/lib/smesh/*.jar \
-  && chmod 500 /var/lib/smesh/*.jar 
+# Set the correct permissions on the files
+RUN chown smesh-node:smesh-node /var/lib/smesh/* \
+  && chmod 400 /var/lib/smesh/* \
+  && chmod 500 /var/lib/smesh/*.jar
 
+# Switch to the smesh-node user
 USER smesh-node
 
 WORKDIR /var/lib/smesh/
