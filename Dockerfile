@@ -7,7 +7,7 @@ RUN install_packages curl
 
 RUN mkdir -p /var/lib/smesh \
   && cd /var/lib/smesh/ \
-  && curl -L "https://dl.bintray.com/boxhead/maven/com/fizzpod/smesh-server/0.1.1/smesh-server-0.1.1.jar" -o smesh-server-0.1.1.jar
+  && curl -L "https://dl.bintray.com/boxhead/maven/com/fizzpod/smesh-server/0.1.2/smesh-server-0.1.1.jar" -o smesh-server-0.1.1.jar
 
 # Add empty configuration file
 ADD application.yml /var/lib/smesh/
