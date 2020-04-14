@@ -9,12 +9,11 @@ RUN mkdir -p /var/lib/smesh \
   && cd /var/lib/smesh/ \
   && curl -L "https://dl.bintray.com/boxhead/maven/com/fizzpod/smesh-server/0.1.2/smesh-server-0.1.2.jar" -o smesh-server.jar
 
-# Add empty configuration file
+# Add empty application configuration file
 ADD application.yml /var/lib/smesh/
 
-# Add startup script
-ADD entrypoint.sh /opt/entrypoint.sh
-RUN chmod +x /opt/entrypoint.sh
+# Add server conf file
+
 
 # Add dedicated user to run the node
 RUN groupadd -r smesh-node && useradd -r -g smesh-node smesh-node
@@ -26,4 +25,4 @@ USER smesh-node
 
 WORKDIR /var/lib/smesh/
 
-ENTRYPOINT  ["/opt/entrypoint.sh"]
+ENTRYPOINT  ["./smesh-server.jar"]
