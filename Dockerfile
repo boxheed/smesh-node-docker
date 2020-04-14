@@ -19,6 +19,11 @@ RUN chmod +x /opt/entrypoint.sh
 # Add dedicated user to run the node
 RUN groupadd -r smesh-node && useradd -r -g smesh-node smesh-node
 
+RUN chown smesh-node:smesh-node /var/lib/smesh/*.jar \
+  && chmod 500 /var/lib/smesh/*.jar 
+
 USER smesh-node
+
+WORKDIR /var/lib/smesh/
 
 ENTRYPOINT  ["/opt/entrypoint.sh"]
